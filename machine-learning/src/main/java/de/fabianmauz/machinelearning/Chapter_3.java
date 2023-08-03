@@ -29,7 +29,7 @@ public class Chapter_3 {
         for (int i = 0; i < maxIterations; i++) {
             double currentLoss = loss(X, Y, w, b);
             System.out.println("Iteration " + i + " --> " + currentLoss);
-            w-=gradient(X, Y, w)*learnRate;
+            w -= gradient(X, Y, w) * learnRate;
         }
         return new float[]{w, b};
     }
@@ -39,22 +39,30 @@ public class Chapter_3 {
         double sum = Y.minus(Y_roof).elementPower(2).elementSum();
         return sum / Y.numRows();
     }
-    
-    public static double gradient (SimpleMatrix X,SimpleMatrix Y,double w){
+
+    public static double gradient(SimpleMatrix X, SimpleMatrix Y, double w) {
         SimpleMatrix Y_roof = predict(X, w, 0);
-        double sum =0;
         SimpleMatrix diff = Y_roof.minus(Y);
-        for(int i=0;i<diff.numRows();i++){
-           sum+=diff.get(i)*X.get(i);
-        }
-        return 2 * sum/diff.numRows();
+        double wGradient = 2 * average(crossProduct(diff, X));
+        
+        return wGradient;
     }
 
     public static SimpleMatrix predict(SimpleMatrix X, double w, double b) {
         return X.scale(w).plus(b);
     }
+    public static double average(SimpleMatrix M){
+         double sum = M.elementSum();
+         return sum/M.getNumElements();
+    }
     
-    public double average(SimpleMatrix M){
-        return M.elementSum()/M.numRows();
+    public static SimpleMatrix crossProduct(SimpleMatrix M1,SimpleMatrix M2){
+        double[][] result=new double[M1.numRows()][M1.numCols()];
+        for(int i=0;i<M1.numRows();i++){
+            for(int j=0;j<M1.numCols();j++){
+                result[i][j]=M1.get(i,j)*M2.get(i,j);
+            }    
+        }
+        return new SimpleMatrix(result);
     }
 }
