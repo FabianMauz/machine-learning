@@ -14,16 +14,20 @@ import org.ejml.simple.SimpleMatrix;
  * @author Fabian
  */
 public class TextImport {
+
     final private String fileLocation;
     final private int[] xRows, yRows;
     final private int skipLines;
-    final private String valueSeperator = " ";
+    final private String valueSeperator;
+    final private boolean addBias;
 
-    public TextImport(String fileLocation, int[] xRows, int[] yRows, int skipLines, String valueSeperator ) {
+    public TextImport(String fileLocation, int[] xRows, int[] yRows, int skipLines, String valueSeperator,boolean addBias) {
         this.fileLocation = fileLocation;
         this.xRows = xRows;
         this.yRows = yRows;
         this.skipLines = skipLines;
+        this.addBias=addBias;
+        this.valueSeperator=valueSeperator;
     }
 
     public SimpleMatrix[] importData() throws Exception {
@@ -38,9 +42,20 @@ public class TextImport {
             String line = skipHeaderLines(br);
             readDataValues(line, xMatrix, yMatrix, br);
         }
+        if(!addBias){
+             return new SimpleMatrix[]{
+            new SimpleMatrix(xMatrix),
+            new SimpleMatrix(yMatrix)
+        };
+        }
+        double[][] xMatrixWithBias = new double[lines - skipLines][xRows.length + 1];
+        for (int i = 0; i < xMatrix.length; i++) {
+            System.arraycopy(xMatrix[i], 0, xMatrixWithBias[i], 0, xMatrix[i].length);
+            xMatrixWithBias[i][xMatrix[i].length] = 1;
+        }
 
         return new SimpleMatrix[]{
-            new SimpleMatrix(xMatrix),
+            new SimpleMatrix(xMatrixWithBias),
             new SimpleMatrix(yMatrix)
         };
     }
@@ -51,7 +66,7 @@ public class TextImport {
             String[] stringValuesOfLine = line.split(valueSeperator);
             xMatrix[currentObservation] = getValuesFromLine(stringValuesOfLine, xRows);
             yMatrix[currentObservation] = getValuesFromLine(stringValuesOfLine, yRows);
-            
+
             line = br.readLine();
             currentObservation++;
         }

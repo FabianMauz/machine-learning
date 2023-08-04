@@ -16,7 +16,7 @@ public class Chapter_3 {
     static protected String valueSeparator = " ";
 
     public static void main(String[] args) throws Exception {
-        TextImport importer = new TextImport(dataLocation, xValuesIndices, yValuesIndices, skipLines, valueSeparator);
+        TextImport importer = new TextImport(dataLocation, xValuesIndices, yValuesIndices, skipLines, valueSeparator,false);
         SimpleMatrix[] matrices = importer.importData();
 
         double[] parameter = train(matrices[0], matrices[1], 20000, 0.001f);
