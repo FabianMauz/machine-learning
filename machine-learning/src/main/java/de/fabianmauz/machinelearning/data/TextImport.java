@@ -21,13 +21,13 @@ public class TextImport {
     final private String valueSeperator;
     final private boolean addBias;
 
-    public TextImport(String fileLocation, int[] xRows, int[] yRows, int skipLines, String valueSeperator,boolean addBias) {
+    public TextImport(String fileLocation, int[] xRows, int[] yRows, int skipLines, String valueSeperator, boolean addBias) {
         this.fileLocation = fileLocation;
         this.xRows = xRows;
         this.yRows = yRows;
         this.skipLines = skipLines;
-        this.addBias=addBias;
-        this.valueSeperator=valueSeperator;
+        this.addBias = addBias;
+        this.valueSeperator = valueSeperator;
     }
 
     public SimpleMatrix[] importData() throws Exception {
@@ -42,11 +42,11 @@ public class TextImport {
             String line = skipHeaderLines(br);
             readDataValues(line, xMatrix, yMatrix, br);
         }
-        if(!addBias){
-             return new SimpleMatrix[]{
-            new SimpleMatrix(xMatrix),
-            new SimpleMatrix(yMatrix)
-        };
+        if (!addBias) {
+            return new SimpleMatrix[]{
+                new SimpleMatrix(xMatrix),
+                new SimpleMatrix(yMatrix)
+            };
         }
         double[][] xMatrixWithBias = new double[lines - skipLines][xRows.length + 1];
         for (int i = 0; i < xMatrix.length; i++) {
