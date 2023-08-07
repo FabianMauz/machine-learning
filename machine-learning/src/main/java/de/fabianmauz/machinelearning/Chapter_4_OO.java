@@ -3,6 +3,7 @@ package de.fabianmauz.machinelearning;
 import de.fabianmauz.machinelearning.data.TextImport;
 import de.fabianmauz.machinelearning.loss.SquareSum;
 import de.fabianmauz.machinelearning.gradient.SquareSumGradient;
+import de.fabianmauz.machinelearning.predict.LinearMultiplication;
 import org.ejml.simple.SimpleMatrix;
 
 /**
@@ -24,7 +25,7 @@ public class Chapter_4_OO {
         SimpleMatrix parameter = train(matrices[0], matrices[1], 100000, 0.001f);
 
         System.out.println("---------");
-        System.out.println("Loss " + new SquareSum(matrices[0], matrices[1], parameter).loss());
+        System.out.println("Loss " + new SquareSum(matrices[0], matrices[1], parameter, new LinearMultiplication()).loss());
         System.out.println("trained parameters");
         System.out.println("w1 -> " + parameter.get(0));
         System.out.println("w2 -> " + parameter.get(1));
