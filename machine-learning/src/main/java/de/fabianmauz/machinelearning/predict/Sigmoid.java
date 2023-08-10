@@ -10,7 +10,7 @@ import org.ejml.simple.SimpleMatrix;
 public class Sigmoid implements Predict {
 
     @Override
-    public SimpleMatrix predict(SimpleMatrix X, SimpleMatrix w) {
+    public SimpleMatrix predict(SimpleMatrix X, SimpleMatrix w) {        
         return Functions.sigmoid(X.mult(w));
     }
 

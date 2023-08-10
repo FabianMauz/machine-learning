@@ -19,6 +19,7 @@ public class TextImportTest extends TestBase {
 
     @Test
     public void importDataFromTextFile() throws Exception {
+             
         SimpleMatrix expectedXMatrix = new SimpleMatrix(new double[][]{
             new double[]{1, 2, 3, 4, 1},
             new double[]{6, 7, 8, 9, 1},

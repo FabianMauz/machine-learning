@@ -22,4 +22,10 @@ public abstract class Matrix {
         }
         return new SimpleMatrix(result);
     }
+
+    public static void apply(SimpleMatrix M, ElementManipulation formula) {
+        for (int i = 0; i < M.getNumElements(); i++) {
+            M.set(i, formula.apply(M.get(i)));
+        }
+    }
 }

@@ -24,7 +24,6 @@ public class LogisticGradient implements Gradient {
         SimpleMatrix Y_roof = new Sigmoid().predict(X, w);
         SimpleMatrix diff = Y_roof.minus(Y);
         SimpleMatrix wGradient = X.transpose().mult(diff);
-
         return wGradient.scale(1d / X.numRows());
     }
 
