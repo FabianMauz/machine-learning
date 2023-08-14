@@ -16,3 +16,4 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 machine-learning/mnist_data_X_train.csv
+machine-learning/src/main/resources/chapter_6/mnist_data_X_train.csv
