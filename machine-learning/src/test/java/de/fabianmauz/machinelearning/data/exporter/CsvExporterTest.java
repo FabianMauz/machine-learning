@@ -15,21 +15,28 @@
  * limitations under the License.
  *
  */
-package de.fabianmauz.machinelearning;
+package de.fabianmauz.machinelearning.data.exporter;
 
-import de.fabianmauz.machinelearning.data.IdxReader;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import org.ejml.simple.SimpleMatrix;
+import org.junit.jupiter.api.Test;
 
 /**
  *
  * @author fmauz
  */
-public class Chapter6 {
-     static protected String dataLocation = "src/main/resources/chapter_6/train-images.idx3-ubyte";
-    public static void main(String[] args) throws IOException {
-       IdxReader reader = new IdxReader();
-       SimpleMatrix X =  reader.importData(dataLocation,10,28,true);
-       
+public class CsvExporterTest {
+    
+    @Test
+    public void exportMatrix_to_csv() throws FileNotFoundException, UnsupportedEncodingException{
+        SimpleMatrix M =new SimpleMatrix(new double[][]{
+            new double[]{1,2,4,5},
+            new double[]{6,7,8,9},
+            new double[]{10,11,12,13},
+        });
+        
+        CsvExporter exporter =new CsvExporter(M);
+        exporter.exportToCsvFile("target/exportMatrix_to_csv.csv");
     }
 }

@@ -25,8 +25,8 @@ public class IdxReader {
                images =  new float[observations][heightInPixel*heightInPixel];
         }
 
-        for (int i = 0; i < observations; i++){
-            
+        for (int i = 0; i < observations; i++){  
+            System.out.println("Convert "+(double)(100*i)/observations +" % ");
              for (int j = 0; j < heightInPixel*heightInPixel; j++){
                  targetStream.read(dataBuffer, 0, 1);
                  float pixelVal = (dataBuffer[0] & 0xFF);
