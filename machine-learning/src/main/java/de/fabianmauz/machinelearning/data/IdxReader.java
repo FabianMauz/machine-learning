@@ -32,6 +32,9 @@ public class IdxReader {
                  float pixelVal = (dataBuffer[0] & 0xFF);
                  images[i][j] = pixelVal;
              }
+             if(addBias){
+                 images[i][heightInPixel*heightInPixel]=1;
+             }
         }
         return new SimpleMatrix(images);
     }
