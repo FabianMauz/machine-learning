@@ -31,7 +31,7 @@ public class Chapter_5 {
     }
 
     public static SimpleMatrix train(SimpleMatrix X, SimpleMatrix Y, int maxIterations, float learnRate) {
-        SimpleMatrix w = new SimpleMatrix(X.numCols(), 1);
+        SimpleMatrix w = new SimpleMatrix(X.numCols(), Y.numRows());
         for (int i = 0; i < maxIterations; i++) {
             double loss = new LogarithmicLoss(X, Y, w, new Sigmoid()).loss();
             System.out.println("Iteration " + i + " --> Loss: " + loss);
