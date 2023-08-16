@@ -1,10 +1,8 @@
 package de.fabianmauz.machinelearning.chapter.chapter_6;
 
-import static de.fabianmauz.machinelearning.chapter.chapter_5.Chapter_5.printAccuracy;
 import static de.fabianmauz.machinelearning.chapter.chapter_5.Chapter_5.train;
 import de.fabianmauz.machinelearning.classifier.Classify;
 import de.fabianmauz.machinelearning.data.TextImport;
-import de.fabianmauz.machinelearning.data.exporter.CsvExporter;
 import de.fabianmauz.machinelearning.helper.Matrix;
 import java.io.IOException;
 import org.ejml.simple.SimpleMatrix;
@@ -21,7 +19,7 @@ public class Chapter_6 {
     static protected int[] xValuesIndices = new int[]{0, 1, 2};
     static protected int[] yValuesIndices = new int[]{};
     static protected int skipLines = 0;
-    static protected String valueSeparator = ",";
+    static protected String valueSeparator = ";";
 
     static int[] createXIndexArray() {
         int[] indices = new int[28 * 28];
