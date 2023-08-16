@@ -16,12 +16,14 @@ public class Chapter_7 {
 
     static protected String dataLocation_train_x = "src/main/resources/chapter_6/mnist_data_X_train.csv";
     static protected String dataLocation_train_y = "src/main/resources/chapter_6/mnist_data_Y_train.csv";
+     static protected String dataLocation_test_x = "src/main/resources/chapter_6/mnist_data_X_test.csv";
+    static protected String dataLocation_test_y = "src/main/resources/chapter_6/mnist_data_Y_test.csv";
 
     static protected int[] xValuesIndices = new int[]{0, 1, 2};
     static protected int[] yValuesIndices = new int[]{};
     static protected int skipLines = 0;
     static protected String valueSeparator = ";";
-    static protected int iterations = 400;
+    static protected int iterations = 200;
     static protected float learnRate = 0.00001f;
 
     static int[] createXIndexArray() {
@@ -37,13 +39,16 @@ public class Chapter_7 {
 
         SimpleMatrix Y_train = prepareData(dataLocation_train_y, 1, new int[]{}, new int[]{0}, true);
         SimpleMatrix Y_train_encoded = expandMatrix(Y_train, 10);
+        
+        SimpleMatrix X_test = prepareData(dataLocation_test_x, 0, createXIndexArray(), new int[]{}, true);
+        SimpleMatrix Y_test = prepareData(dataLocation_test_y, 1, new int[]{}, new int[]{0}, true);
 
         SimpleMatrix parameter = train(X_train, Y_train_encoded, iterations, learnRate);
-        SimpleMatrix y_hat = new ClassifyOneOfN().classify(X_train, parameter);
+        SimpleMatrix y_hat = new ClassifyOneOfN().classify(X_test, parameter);
         System.out.println("---------");
         
        
-        System.out.println("Accurracy "+Math.round(10000*calculateAccurary(Y_train,y_hat))/100d+" %");
+        System.out.println("Accurracy "+Math.round(10000*calculateAccurary(Y_test,y_hat))/100d+" %");
        
     }
 
