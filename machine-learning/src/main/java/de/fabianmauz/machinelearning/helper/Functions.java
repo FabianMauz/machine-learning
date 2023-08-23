@@ -18,7 +18,17 @@ public abstract class Functions {
     }
 
     public static SimpleMatrix softMax(SimpleMatrix z) {
-        double[][] back = new double[z.numRows()][z.numRows()];
+        double[][] back = new double[z.numRows()][z.numCols()];
+
+        for (int i = 0; i < z.numRows(); i++) {
+            double expOfSum = 0;
+            for (int j = 0; j < z.numCols(); j++) {
+                expOfSum += Math.exp(z.get(i, j));
+            }
+            for (int j = 0; j < z.numCols(); j++) {
+                back[i][j] = Math.exp(z.get(i, j)) / expOfSum;
+            }
+        }
         return new SimpleMatrix(back);
     }
 }
