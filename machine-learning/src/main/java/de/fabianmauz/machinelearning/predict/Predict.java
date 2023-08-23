@@ -8,5 +8,5 @@ import org.ejml.simple.SimpleMatrix;
  */
 public interface Predict {
 
-    public SimpleMatrix predict(SimpleMatrix X, SimpleMatrix w);
+    public SimpleMatrix predict(SimpleMatrix X, SimpleMatrix... w);
 }

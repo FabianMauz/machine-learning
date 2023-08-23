@@ -16,4 +16,9 @@ public abstract class Functions {
         }
         return z;
     }
+
+    public static SimpleMatrix softMax(SimpleMatrix z) {
+        double[][] back = new double[z.numRows()][z.numRows()];
+        return new SimpleMatrix(back);
+    }
 }

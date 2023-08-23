@@ -36,7 +36,7 @@ public class TextImportTest extends TestBase {
         importer = new TextImport(rootFolder + "demo_data.txt", new int[]{0, 1, 2, 3}, new int[]{4}, 0, " ",true);
         SimpleMatrix[] loadedMatrices = importer.importData();
         Assertions.assertTrue(expectedXMatrix.isIdentical(loadedMatrices[0], 0.01d));
-        Assertions.assertTrue(expectedYMatrix.isIdentical(loadedMatrices[1], 0.01d));
+        Assertions.assertTrue(expectedYMatrix.isIdentical(loadedMatrices[1], 0.01d));        
     }
 
 }

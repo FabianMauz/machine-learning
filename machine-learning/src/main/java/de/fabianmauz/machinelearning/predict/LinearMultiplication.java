@@ -9,8 +9,8 @@ import org.ejml.simple.SimpleMatrix;
 public class LinearMultiplication implements Predict {
 
     @Override
-    public SimpleMatrix predict(SimpleMatrix X, SimpleMatrix w) {
-        return X.mult(w);
+    public SimpleMatrix predict(SimpleMatrix X, SimpleMatrix... w) {
+        return X.mult(w[0]);
     }
 
 }
