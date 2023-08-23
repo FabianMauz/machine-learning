@@ -28,4 +28,13 @@ public abstract class Matrix {
             M.set(i, formula.apply(M.get(i)));
         }
     }
+
+    public static SimpleMatrix addBias(SimpleMatrix M) {
+        double[][] oneValues = new double[M.numRows()][1];
+        for (int i = 0; i < M.numRows(); i++) {
+            oneValues[i][0] = 1;
+        }
+
+        return M.concatColumns(new SimpleMatrix(oneValues));
+    }
 }
