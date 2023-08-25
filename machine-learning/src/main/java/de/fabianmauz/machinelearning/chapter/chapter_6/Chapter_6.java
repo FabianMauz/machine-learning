@@ -1,9 +1,11 @@
 package de.fabianmauz.machinelearning.chapter.chapter_6;
 
-import static de.fabianmauz.machinelearning.chapter.chapter_5.Chapter_5.train;
 import de.fabianmauz.machinelearning.classifier.Classify;
 import de.fabianmauz.machinelearning.data.TextImport;
+import de.fabianmauz.machinelearning.gradient.LogisticGradient;
 import de.fabianmauz.machinelearning.helper.Matrix;
+import de.fabianmauz.machinelearning.loss.LogarithmicLoss;
+import de.fabianmauz.machinelearning.predict.Sigmoid;
 import java.io.IOException;
 import org.ejml.simple.SimpleMatrix;
 
@@ -50,6 +52,17 @@ public class Chapter_6 {
             System.out.println("Digit "+i+" -> "+(Math.round(accuracy[i]*10000d)/100d)+"%");
         }
 
+    }
+    
+    public static SimpleMatrix train(SimpleMatrix X, SimpleMatrix Y, int maxIterations, float learnRate) {
+        SimpleMatrix w = new SimpleMatrix(X.numCols(), Y.numCols());
+        for (int i = 0; i < maxIterations; i++) {
+            double loss = new LogarithmicLoss(X, Y, w, new Sigmoid()).loss();
+            System.out.println("Iteration " + i + " --> Loss: " + loss);
+            SimpleMatrix gradient = new LogisticGradient(X, Y, w).gradient();
+            w = w.minus(gradient.scale(learnRate));
+        }
+        return w;
     }
     
      public static double calculate(SimpleMatrix X, SimpleMatrix w, SimpleMatrix Y) {
