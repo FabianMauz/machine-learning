@@ -1,6 +1,7 @@
 package de.fabianmauz.machinelearning.helper;
 
 import org.ejml.simple.SimpleMatrix;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -35,6 +36,27 @@ public abstract class Matrix {
             oneValues[i][0] = 1;
         }
 
-        return M.concatColumns(new SimpleMatrix(oneValues));
+        return new SimpleMatrix(oneValues).concatColumns(M);
+    }
+
+    public static SimpleMatrix expandMatrix(SimpleMatrix M, int size) {
+        double[][] mExpanded = new double[M.numRows()][size];
+        for (int i = 0; i < M.numRows(); i++) {
+            mExpanded[i][(int) M.get(i)] = 1;
+        }
+
+        return new SimpleMatrix(mExpanded);
+    }
+
+    public static SimpleMatrix extractWeightsFromJson(JSONArray json) {
+        int rows = json.size();
+        int cols = ((JSONArray) json.get(0)).size();
+        double[][] weights = new double[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                weights[i][j] = (double) ((JSONArray) json.get(i)).get(j);
+            }
+        }
+        return new SimpleMatrix(weights);
     }
 }

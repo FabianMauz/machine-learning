@@ -1,5 +1,6 @@
 package de.fabianmauz.machinelearning.classifier;
 
+import de.fabianmauz.machinelearning.predict.Predict;
 import de.fabianmauz.machinelearning.predict.Sigmoid;
 import org.ejml.simple.SimpleMatrix;
 
@@ -9,9 +10,20 @@ import org.ejml.simple.SimpleMatrix;
  */
 public class ClassifyOneOfN {
 
+    Predict predictor = new Sigmoid();
+
+    public ClassifyOneOfN() {
+
+    }
+
+    public ClassifyOneOfN(Predict predictor) {
+        this.predictor = predictor;
+    }
+
     public SimpleMatrix classify(SimpleMatrix X, SimpleMatrix... w) {
 
-        SimpleMatrix values = new Sigmoid().predict(X, w);
+        SimpleMatrix values = predictor.predict(X, w);
+        
         double[][] back = new double[values.numRows()][2];
         for (int i = 0; i < values.numRows(); i++) {
 

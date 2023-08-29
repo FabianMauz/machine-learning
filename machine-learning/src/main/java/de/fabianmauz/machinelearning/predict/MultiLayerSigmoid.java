@@ -13,7 +13,7 @@ public class MultiLayerSigmoid implements Predict {
     @Override
     public SimpleMatrix predict(SimpleMatrix X, SimpleMatrix... w) {
         SimpleMatrix h = Functions.sigmoid(Matrix.addBias(X).mult(w[0]));
-        return Functions.softMax(Functions.softMax(Matrix.addBias(h).mult(w[1])));
+        return Functions.softMax(Matrix.addBias(h).mult(w[1]));
     }
 
 }
